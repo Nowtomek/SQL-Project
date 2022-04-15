@@ -1,0 +1,25 @@
+DELIMITER $$ 
+CREATE PROCEDURE product_p()
+BEGIN
+    INSERT INTO vehdb1.product_t (
+	PRODUCT_ID,
+	VEHICLE_MAKER, 
+	VEHICLE_MODEL, 
+	VEHICLE_COLOR, 
+	VEHICLE_MODEL_YEAR, 
+	VEHICLE_PRICE
+
+    )   
+    SELECT 
+	PRODUCT_ID,
+	VEHICLE_MAKER, 
+	VEHICLE_MODEL, 
+	VEHICLE_COLOR, 
+	VEHICLE_MODEL_YEAR, 
+	VEHICLE_PRICE
+
+     FROM vehicles_t WHERE PRODUCT_ID NOT IN (SELECT DISTINCT PRODUCT_ID FROM product_t);
+END;
+ -- CALL product_p();
+ 
+ -- select count(distinct product_id) from  product_t;
